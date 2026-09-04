@@ -19,6 +19,8 @@ namespace lab0_git
         public MainWindow()
         {
             InitializeComponent();
+
+            //kjhjk
         }
     }
 }
