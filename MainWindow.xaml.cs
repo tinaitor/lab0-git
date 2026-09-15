@@ -47,6 +47,8 @@ namespace lab0_git
             Point2D p3 = new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height));
             tr = new Triangle(p1, p2, p3);
             DrawTriangle(tr);
+            Rectangle rect = new Rectangle(new Point2D(50, 50), 150, 100);
+            DrawRectangle(rect);
         }
 
         public void DrawLine(Point2D p1, Point2D p2)
@@ -67,7 +69,18 @@ namespace lab0_git
             DrawLine(tr.P2, tr.P3);
             DrawLine(tr.P3, tr.P1);
         }
+        public void DrawRectangle(Rectangle rect)
+        {
+            Point2D p1 = rect.Start;
+            Point2D p2 = new Point2D(rect.Start.X + rect.Width, rect.Start.Y);
+            Point2D p3 = new Point2D(rect.Start.X + rect.Width, rect.Start.Y + rect.Height);
+            Point2D p4 = new Point2D(rect.Start.X, rect.Start.Y + rect.Height);
 
+            DrawLine(p1, p2);
+            DrawLine(p2, p3);
+            DrawLine(p3, p4);
+            DrawLine(p4, p1);
+        }
         public void ClearScene()
         {
             Scene.Children.Clear();
