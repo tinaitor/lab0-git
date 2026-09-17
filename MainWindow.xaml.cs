@@ -103,5 +103,30 @@ namespace lab0_git
         {
             Scene.Children.Clear();
         }
+        private void Draw_Click(object sender, RoutedEventArgs e)
+        {
+            string[] t = TriangleInput.Text.Split(',');
+            string[] s = SquareInput.Text.Split(',');
+
+            DrawFiguresByPoints(
+                new Point2D(int.Parse(t[0]), int.Parse(t[1])),
+                new Point2D(int.Parse(t[2]), int.Parse(t[3])),
+                new Point2D(int.Parse(t[4]), int.Parse(t[5])),
+                new Point2D(int.Parse(s[0]), int.Parse(s[1])),
+                int.Parse(s[2])
+            );
+        }
+
+        private void Random_Click(object sender, RoutedEventArgs e)
+        {
+            DrawFiguresByPoints(
+                new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height)),
+                new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height)),
+                new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height)),
+                new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height)),
+                rnd.Next(20, 150)
+            );
+        }
     }
+
 }

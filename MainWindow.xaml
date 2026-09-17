@@ -7,6 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-		<Canvas x:Name="Scene" HorizontalAlignment="Left" Height="400" Margin="15,0,0,0" VerticalAlignment="Center" Width="680"/>
+        <Canvas x:Name="Scene" HorizontalAlignment="Left" Height="400" Margin="15,0,0,0" VerticalAlignment="Center" Width="680"/>
+        <Border HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,15,0"
+                Background="White" BorderBrush="Gray" BorderThickness="1" Padding="10" CornerRadius="4">
+            <StackPanel Width="160">
+                <TextBlock Text="Треугольник"/>
+                <TextBox x:Name="TriangleInput" Text="50,50,200,80,100,250" Margin="0,0,0,10"/>
+                <TextBlock Text="Квадрат"/>
+                <TextBox x:Name="SquareInput" Text="300,100,120" Margin="0,0,0,10"/>
+                <Button Content="По координатам" Click="Draw_Click" Margin="0,0,0,5"/>
+                <Button Content="Рандом" Click="Random_Click"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
