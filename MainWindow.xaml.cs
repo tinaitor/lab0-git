@@ -47,7 +47,11 @@ namespace lab0_git
             Point2D p3 = new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height));
             tr = new Triangle(p1, p2, p3);
             DrawTriangle(tr);
-            Rectangle rect = new Rectangle(new Point2D(50, 50), 150, 100);
+            Rectangle rect = new Rectangle(
+                new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height)),
+                rnd.Next(20, 200),
+                rnd.Next(20, 150)
+            );
             DrawRectangle(rect);
         }
 
