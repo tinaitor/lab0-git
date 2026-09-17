@@ -54,7 +54,21 @@ namespace lab0_git
             );
             DrawRectangle(rect);
         }
+        public void DrawFiguresByPoints(
+        Point2D triangleP1,
+        Point2D triangleP2,
+        Point2D triangleP3,
+        Point2D squareStart,
+        int squareSide)
+        {
+        tr = new Triangle(triangleP1, triangleP2, triangleP3);
 
+        Rectangle square = new Rectangle(squareStart,squareSide,squareSide);
+
+        ClearScene();
+        DrawTriangle(tr);
+        DrawRectangle(square);
+        }   
         public void DrawLine(Point2D p1, Point2D p2)
         {
             Line line = new Line();
