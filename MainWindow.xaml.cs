@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿
+using System;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -35,40 +37,63 @@ namespace lab0_git
     }
     public partial class MainWindow : Window
     {
-        Triangle tr;
+        Triangle tr = null!;
         Random rnd = new Random();
+
+        Triangle baseTriangle;
+        Rectangle baseRectangle;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            Point2D p1 = new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height));
-            Point2D p2 = new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height));
-            Point2D p3 = new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height));
-            tr = new Triangle(p1, p2, p3);
-            DrawTriangle(tr);
-            Rectangle rect = new Rectangle(
+            baseTriangle = new Triangle(
+                new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height)),
+                new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height)),
+                new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height)));
+
+            baseRectangle = new Rectangle(
                 new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height)),
                 rnd.Next(20, 200),
-                rnd.Next(20, 150)
-            );
-            DrawRectangle(rect);
+                rnd.Next(20, 150));
+
+            Redraw();
         }
+
         public void DrawFiguresByPoints(
-        Point2D triangleP1,
-        Point2D triangleP2,
-        Point2D triangleP3,
-        Point2D squareStart,
-        int squareSide)
+            Point2D triangleP1,
+            Point2D triangleP2,
+            Point2D triangleP3,
+            Point2D squareStart,
+            int squareSide)
         {
-        tr = new Triangle(triangleP1, triangleP2, triangleP3);
+            baseTriangle = new Triangle(triangleP1, triangleP2, triangleP3);
+            baseRectangle = new Rectangle(squareStart, squareSide, squareSide);
+            Redraw();
+        }
 
-        Rectangle square = new Rectangle(squareStart,squareSide,squareSide);
+        public void Redraw()
+        {
+            if (baseTriangle == null || baseRectangle == null) return;
 
-        ClearScene();
-        DrawTriangle(tr);
-        DrawRectangle(square);
-        }   
+            int dx = (int)OffsetX.Value;
+            int dy = (int)OffsetY.Value;
+
+            ClearScene();
+
+            Triangle t = new Triangle(
+                new Point2D(baseTriangle.P1.X + dx, baseTriangle.P1.Y + dy),
+                new Point2D(baseTriangle.P2.X + dx, baseTriangle.P2.Y + dy),
+                new Point2D(baseTriangle.P3.X + dx, baseTriangle.P3.Y + dy));
+
+            Rectangle r = new Rectangle(
+                new Point2D(baseRectangle.Start.X + dx, baseRectangle.Start.Y + dy),
+                baseRectangle.Width, baseRectangle.Height);
+
+            DrawTriangle(t);
+            DrawRectangle(r);
+        }
+
         public void DrawLine(Point2D p1, Point2D p2)
         {
             Line line = new Line();
@@ -107,7 +132,6 @@ namespace lab0_git
         {
             string[] t = TriangleInput.Text.Split(',');
             string[] s = SquareInput.Text.Split(',');
-
             DrawFiguresByPoints(
                 new Point2D(int.Parse(t[0]), int.Parse(t[1])),
                 new Point2D(int.Parse(t[2]), int.Parse(t[3])),
@@ -126,6 +150,11 @@ namespace lab0_git
                 new Point2D(rnd.Next(0, (int)Scene.Width), rnd.Next(0, (int)Scene.Height)),
                 rnd.Next(20, 150)
             );
+        }
+
+        private void Offset_Changed(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Redraw();
         }
     }
 

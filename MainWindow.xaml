@@ -16,8 +16,18 @@
                 <TextBlock Text="Квадрат"/>
                 <TextBox x:Name="SquareInput" Text="300,100,120" Margin="0,0,0,10"/>
                 <Button Content="По координатам" Click="Draw_Click" Margin="0,0,0,5"/>
-                <Button Content="Рандом" Click="Random_Click"/>
+                <Button Content="Рандом" Click="Random_Click" Margin="0,0,0,10"/>
+                <TextBlock Text="Сдвиг X"/>
+                <Slider x:Name="OffsetX" Minimum="-300" Maximum="300" Value="0"
+                        ValueChanged="Offset_Changed"/>
+                <TextBlock Text="Сдвиг Y"/>
+                <Slider x:Name="OffsetY" Minimum="-300" Maximum="300" Value="0"
+                        ValueChanged="Offset_Changed"/>
             </StackPanel>
         </Border>
     </Grid>
 </Window>
+
+
+
+
